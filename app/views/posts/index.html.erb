@@ -1,0 +1,23 @@
+<h1> Posts Index </h1>
+
+<% if @posts.any? %>
+    <p> <%= pluralize(@posts.count, 'post') %> found </p>
+    <% @posts.each do |post| %>
+        <div>
+            <h2> <%= post.title %> </h2>
+            <p> <%= post.body %> </p>
+            <% if user_signed_in? %>
+                <p> Posted by: <%= post.user.email %> </p>
+            <% end %>
+        </div>
+    <% end %>
+
+<% else %>
+    <h2>No posts yet</h2>
+<% end %>
+
+
+<% if user_signed_in? %>
+  <%= link_to 'New Post', new_post_path %>
+<% end %>
+
